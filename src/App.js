@@ -43,10 +43,15 @@ function App() {
     setShownCountry(country);
   };
 
+  const resetSearch = () => {
+    setNewSearch("")
+  }
+  
   return (
     <div>
       <h1>Find countries</h1>
       <input value={newSearch} onChange={handleChange} />
+      <button onClick={resetSearch}>reset</button>
       <Countries
         countries={countriesToShow}
         shown={shownCountry}
