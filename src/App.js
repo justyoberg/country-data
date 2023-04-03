@@ -13,12 +13,8 @@ function App() {
       .then((response) => setCountries(response.data));
   }, []);
 
-  const resetShown = () => {
-    setShownCountry(null);
-  }
-
   useEffect(() => {
-    resetShown()
+    setShownCountry(null);
   }, [newSearch])
 
   if (!countries) return null;
@@ -42,7 +38,6 @@ function App() {
       <Countries countries={countriesToShow} 
                   shown={shownCountry} 
                   setShown={showCountry}
-                  resetShown={resetShown}
       />
     </div>
   );
