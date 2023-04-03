@@ -1,6 +1,4 @@
 const Countries = ({ countries, shown, setShown, weather }) => {
-  console.log("weather is null", weather);
-
   const showCountry = (country) => {
     if (weather) {
       return (
@@ -21,6 +19,7 @@ const Countries = ({ countries, shown, setShown, weather }) => {
             src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
             alt="icon"
           />
+          <p>Wind: {weather.wind.speed} m/s</p>
         </div>
       );
     }
