@@ -1,19 +1,29 @@
-const Countries = ({ countries, shown, setShown }) => {
+const Countries = ({ countries, shown, setShown, weather }) => {
+  console.log("weather is null", weather);
+
   const showCountry = (country) => {
-    return (
-      <div>
-        <h1>{country.name.common}</h1>
-        <p>Capital: {country.capital[0]}</p>
-        <p>Area: {country.area}</p>
-        <h3>Languages:</h3>
-        <ul>
-          {Object.values(country.languages).map((item) => {
-            return <li key={item}>{item}</li>;
-          })}
-        </ul>
-        <img src={country.flags.png} alt="flag" />
-      </div>
-    );
+    if (weather) {
+      return (
+        <div>
+          <h1>{country.name.common}</h1>
+          <p>Capital: {country.capital[0]}</p>
+          <p>Area: {country.area}</p>
+          <h3>Languages:</h3>
+          <ul>
+            {Object.values(country.languages).map((item) => {
+              return <li key={item}>{item}</li>;
+            })}
+          </ul>
+          <img src={country.flags.png} alt="flag" />
+          <h2>Weather in {country.capital[0]}</h2>
+          <p>Temperature: {(weather.main.temp - 273.15).toFixed(2)}c</p>
+          <img
+            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+            alt="icon"
+          />
+        </div>
+      );
+    }
   };
 
   if (shown) {
@@ -21,13 +31,13 @@ const Countries = ({ countries, shown, setShown }) => {
   }
 
   if (countries.length === 250) {
-    return <p>Enter a country</p>
+    return <p>Enter a country</p>;
   } else if (countries.length <= 0) {
     return <p>No matches found</p>;
   } else if (countries.length > 10) {
     return <p>Too many matches, specify another filter</p>;
   } else if (countries.length === 1) {
-    return showCountry(countries[0]);
+    setShown(countries[0]);
   }
 
   return (
